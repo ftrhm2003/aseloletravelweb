@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">  
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">  
+<h:head> 
+     <h:outputStylesheet library="css" name="home.css"/>
+</h:head>  
+<h:body>  
+    <section id="aboutus">
+        <div class="layar-dalam">
+                    <h3>All User Information</h3>
+    <h:form>  
+        <p:commandButton action="Search?faces-redirect=true" icon="ui-icon-search" value="Search" />
+        <p:commandButton icon="ui-icon-plusthick" id="addUserBtn" value="Add User"  update=":userDetail1" ajax="true" oncomplete="PF('$userDetail1').show()" />
+        <p:commandButton action="home?faces-redirect=true" icon="ui-icon-logout" value="Logout" />
+    </h:form>  
+  
+    <p:spacer> </p:spacer>  
+    <h:form id="form1">  
+        <p:dataTable id="dataTable" var="user" paginator="true" rows="5" value="#{userBean.users}">  
+            <p:column headerText="RecordNo">  
+                <h:outputText value="#{user.recordNo}" />  
+            </p:column>  
+            <p:column headerText="Name">  
+                <h:outputText value="#{user.name}" />  
+            </p:column>  
+            <p:column sortBy="#{user.tickets}" headerText="Tickets">  
+                <h:outputText value="#{user.tickets}" />  
+  
+            </p:column>  
+  
+            <p:column headerText="Destination">  
+                <h:outputText value="#{user.destination}" />  
+            </p:column>  
+            <p:column headerText="Date of Boking">  
+                <h:outputText value="#{user.dob}">  
+                    <f:convertDateTime type="date" pattern="dd-MMM-yyyy" />  
+                </h:outputText>  
+            </p:column>  
+            <p:column headerText="Email">  
+                <h:outputText value="#{user.email}" />  
+            </p:column>  
+        </p:dataTable>  
+    </h:form> 
+    </div>
+    </section>
+   <p:dialog id="userDetail1" widgetVar="$userDetail1" header="Add Order" hideEffect="explode" appendTo="@(body)" resizable="false" draggable="false" closeOnEscape="true">  
+        <h:form>  
+  
+            <p:panelGrid columns="2">  
+                <h:outputLabel for="username" value="Name: *" />  
+                <p:inputText id="username" value="#{userBean.newuser.name}" label="User Name" placeholder="Name" />  
+  
+                <h:outputLabel for="tickets" value="Tickets" />  
+                <p:inputText id="tickets" label="tickets" value="#{userBean.newuser.tickets}" placeholder="Number of Tickets" />  
+  
+                <h:outputLabel for="destination" value="Destination" />  
+                <p:selectOneMenu id="destination" label="destination" value="#{userBean.newuser.destination}" effect="fold">  
+                    <f:selectItem itemLabel="Select One" itemValue="" />  
+                    <f:selectItem itemLabel="Bali" itemValue="Bali" />  
+                    <f:selectItem itemLabel="Jogja" itemValue="Jogja" />  
+                    <f:selectItem itemLabel="Lombok" itemValue="Lombok" /> 
+                </p:selectOneMenu>  
+                <p:outputLabel for="dob" value="Date of Boking" />  
+  
+                <p:calendar id="dob" value="#{userBean.newuser.dob}" label="DatePosted:" required="true" pattern="dd/MM/yyyy" effect="slideDown" requiredMessage="Please Enter Date of Birth!" navigator="true" showButtonPanel="true" yearRange="c-60:c+60" placeholder="Date of Boking" />  
+  
+                <p:outputLabel for="email" value="Email" />  
+                <p:inputTextarea id="email" label="email" value="#{userBean.newuser.email}" placeholder="Email" />  
+  
+                <p:commandButton value="add" process="@form" id="AddButtonId" ajax="true" icon="ui-icon-plus"  actionListener="#{userBean.addUser()}" oncomplete="PF('$userDetail1').hide()" />  
+  
+                <p:commandButton id="cancelAddButtonId" value="Cancel" onclick="handleComplete(xhr, status, args)" />  
+            </p:panelGrid>  
+        </h:form>  
+  
+    </p:dialog>  
+</h:body>  
+  
+</html>  

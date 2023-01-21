@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 13, 2022 10:57:48 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="pojo.User" table="user" catalog="aseloletraveljsf" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="recordNo" type="string">
+            <column name="RecordNo" length="20" />
+        </property>
+        <property name="name" type="string">
+            <column name="Name" length="50" />
+        </property>
+        <property name="tickets" type="java.lang.Integer">
+            <column name="tickets" />
+        </property>
+        <property name="destination" type="string">
+            <column name="destination" length="20" />
+        </property>
+        <property name="dob" type="date">
+            <column name="Dob" length="10" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="50" />
+        </property>
+    </class>
+</hibernate-mapping>
